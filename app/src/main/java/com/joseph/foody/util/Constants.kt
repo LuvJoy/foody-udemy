@@ -1,4 +1,4 @@
-package com.joseph.foody
+package com.joseph.foody.util
 
 class Constants {
 
