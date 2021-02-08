@@ -14,6 +14,7 @@ import com.joseph.foody.base.BaseFragment
 import com.joseph.foody.databinding.FragmentRecipesBinding
 import com.joseph.foody.util.Constants.Companion.API_KEY
 import com.joseph.foody.util.NetworkResult
+import com.joseph.foody.util.observeOnce
 import com.joseph.foody.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -50,7 +51,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
 
     private fun readDatabase() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+            mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
                 if (database.isNotEmpty()) {
                     Log.d("RecipesFragment", "readDatabase Called")
                     mAdapter.setData(database[0].foodRecipe)
