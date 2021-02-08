@@ -1,13 +1,13 @@
-package com.joseph.foody
+package com.joseph.foody.viewmodels
 
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.joseph.foody.data.Repository
 import com.joseph.foody.models.FoodRecipe
@@ -34,6 +34,7 @@ class MainViewModel @ViewModelInject constructor(
                 val response = repository.remote.getRecipes(queries)
                 recipesResponse.value = handleFoodRecipesResponse(response)
             }catch (e: Exception) {
+                Log.d("Message", e.message.toString())
                 recipesResponse.value = NetworkResult.Error("Recipes Not found")
             }
         } else {
