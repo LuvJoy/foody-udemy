@@ -39,6 +39,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
 
         setupRecyclerView()
         readDatabase()
+        binding.mainViewModel = mainViewModel
     }
 
     private fun setupRecyclerView() {
