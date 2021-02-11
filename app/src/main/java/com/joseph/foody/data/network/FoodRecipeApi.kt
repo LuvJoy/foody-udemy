@@ -14,4 +14,10 @@ interface FoodRecipeApi {
         @QueryMap queries: Map<String, String>,
         @Header("Content-Type") type: String = "application/json"
     ): Response<FoodRecipe>
+
+    @GET("/recipes/complexSearch")
+    suspend fun searchRecipes(
+        @QueryMap searchQuery: Map<String, String>
+    ): Response<FoodRecipe>
+
 }
