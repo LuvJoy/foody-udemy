@@ -47,7 +47,11 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
-        readDatabase()
+
+        recipesViewModel.readBackOnline.observe(viewLifecycleOwner, {
+            recipesViewModel.backOnline = it
+        })
+
         binding.mainViewModel = mainViewModel
         binding.recipesFab.setOnClickListener {
             if(recipesViewModel.networkStatus) {
@@ -64,6 +68,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
                     Log.d("NetworkListener", status.toString())
                     recipesViewModel.networkStatus = status
                     recipesViewModel.showNetworkStatus()
+                    readDatabase()
                 }
         }
 
