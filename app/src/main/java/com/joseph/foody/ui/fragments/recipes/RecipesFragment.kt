@@ -15,12 +15,16 @@ import com.joseph.foody.adapters.RecipesAdapter
 import com.joseph.foody.base.BaseFragment
 import com.joseph.foody.databinding.FragmentRecipesBinding
 import com.joseph.foody.util.Constants.Companion.API_KEY
+import com.joseph.foody.util.NetworkListener
 import com.joseph.foody.util.NetworkResult
 import com.joseph.foody.util.observeOnce
 import com.joseph.foody.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_recipes) {
 
@@ -28,6 +32,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
 
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
+    private lateinit var networkListener: NetworkListener
     private val mAdapter by lazy { RecipesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,8 +50,23 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
         readDatabase()
         binding.mainViewModel = mainViewModel
         binding.recipesFab.setOnClickListener {
-            findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            if(recipesViewModel.networkStatus) {
+                findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            } else {
+                recipesViewModel.showNetworkStatus()
+            }
         }
+
+        lifecycleScope.launch {
+            networkListener = NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect { status ->
+                    Log.d("NetworkListener", status.toString())
+                    recipesViewModel.networkStatus = status
+                    recipesViewModel.showNetworkStatus()
+                }
+        }
+
     }
 
     private fun setupRecyclerView() {
