@@ -2,6 +2,8 @@ package com.joseph.foody.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -11,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.joseph.foody.R
 import com.joseph.foody.databinding.ActivityMainBinding
+import com.joseph.foody.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this@MainActivity, R.layout.activity_main)
 
         initNavigation()
+
     }
 
     private fun initNavigation() {

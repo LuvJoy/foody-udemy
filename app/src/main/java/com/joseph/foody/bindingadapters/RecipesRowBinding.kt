@@ -26,7 +26,6 @@ fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
     }
 }
 
-
 @BindingAdapter("loadImageFromUrl")
 fun loadImageFromUrl(imageView: ImageView, imageUrl: String) {
     imageView.load(imageUrl) {

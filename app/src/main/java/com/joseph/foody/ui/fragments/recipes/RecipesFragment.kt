@@ -7,6 +7,8 @@ import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -45,6 +47,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         recipesViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,6 +80,9 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
                 }
         }
 
+        mainViewModel.readRecipes.observe(viewLifecycleOwner, {
+            Log.d("Fragment", "Fragment : ${it.toString()}")
+        })
     }
 
     private fun setupRecyclerView() {
