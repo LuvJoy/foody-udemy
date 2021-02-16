@@ -11,6 +11,7 @@ import com.joseph.foody.R
 import com.joseph.foody.base.BaseFragment
 import com.joseph.foody.databinding.FragmentOverviewBinding
 import com.joseph.foody.models.Result
+import org.jsoup.Jsoup
 
 
 class OverviewFragment : BaseFragment<FragmentOverviewBinding>(R.layout.fragment_overview) {
@@ -28,33 +29,86 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(R.layout.fragment
 
         binding.apply {
             mainImageView.load(myBundle?.image)
-            titleTextView.text= myBundle?.title
-            likesTextView.text= myBundle?.aggregateLikes.toString()
-            timeTextView.text= myBundle?.readyInMinutes.toString()
-            summaryTextView.text= myBundle?.summary.toString()
-
-            if(myBundle?.vegetarian == true) {
-                vegetarianImageView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-                vegetarianTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+            titleTextView.text = myBundle?.title
+            likesTextView.text = myBundle?.aggregateLikes.toString()
+            timeTextView.text = myBundle?.readyInMinutes.toString()
+            myBundle?.summary?.let {
+                val summary = Jsoup.parse(it).text()
+                summaryTextView.text = summary
             }
-            if(myBundle?.vegan == true) {
-                veganImageView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
+
+            if (myBundle?.vegetarian == true) {
+                vegetarianImageView.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
+                vegetarianTextView.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
+            }
+            if (myBundle?.vegan == true) {
+                veganImageView.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
                 veganTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
             }
-            if(myBundle?.glutenFree == true) {
-                glutenFreeImageView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-                glutenFreeTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+            if (myBundle?.glutenFree == true) {
+                glutenFreeImageView.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
+                glutenFreeTextView.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
             }
-            if(myBundle?.dairyFree == true) {
-                dairyFreeImageView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-                dairyFreeTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+            if (myBundle?.dairyFree == true) {
+                dairyFreeImageView.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
+                dairyFreeTextView.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
             }
-            if(myBundle?.veryHealthy == true) {
-                healthyImageView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
-                healthyTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+            if (myBundle?.veryHealthy == true) {
+                healthyImageView.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
+                healthyTextView.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
             }
-            if(myBundle?.cheap == true) {
-                cheapImageView.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green))
+            if (myBundle?.cheap == true) {
+                cheapImageView.setColorFilter(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.green
+                    )
+                )
                 cheapTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
             }
 

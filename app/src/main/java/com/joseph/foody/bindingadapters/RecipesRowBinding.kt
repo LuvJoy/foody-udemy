@@ -12,6 +12,7 @@ import coil.load
 import com.joseph.foody.R
 import com.joseph.foody.models.Result
 import com.joseph.foody.ui.fragments.recipes.RecipesFragmentDirections
+import org.jsoup.Jsoup
 
 @BindingAdapter("onRecipeClickListener")
 fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
@@ -55,5 +56,13 @@ fun applyVeganColor(view: View, vegan: Boolean) {
                 view.setColorFilter(ContextCompat.getColor(view.context, R.color.green))
             }
         }
+    }
+}
+
+@BindingAdapter("parseHtml")
+fun parseHtml(textView: TextView, description: String) {
+    if(description != null) {
+        val desc = Jsoup.parse(description).text()
+        textView.text = desc
     }
 }
