@@ -11,6 +11,7 @@ import com.joseph.foody.R
 import com.joseph.foody.base.BaseFragment
 import com.joseph.foody.databinding.FragmentOverviewBinding
 import com.joseph.foody.models.Result
+import com.joseph.foody.util.Constants.Companion.RECIPE_RESULT
 import org.jsoup.Jsoup
 
 
@@ -25,7 +26,7 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(R.layout.fragment
 
     private fun initView() {
         val args = arguments
-        val myBundle: Result? = args?.getParcelable("recipeBundle")
+        val myBundle: Result? = args?.getParcelable(RECIPE_RESULT)
 
         binding.apply {
             mainImageView.load(myBundle?.image)
