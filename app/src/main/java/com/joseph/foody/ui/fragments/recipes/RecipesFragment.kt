@@ -47,7 +47,6 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         recipesViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,9 +79,6 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
                 }
         }
 
-        mainViewModel.readRecipes.observe(viewLifecycleOwner, {
-            Log.d("Fragment", "Fragment : ${it.toString()}")
-        })
     }
 
     private fun setupRecyclerView() {
