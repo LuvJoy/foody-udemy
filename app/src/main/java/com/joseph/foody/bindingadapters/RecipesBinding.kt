@@ -4,11 +4,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.joseph.foody.data.database.RecipesDatabase
-import com.joseph.foody.data.database.RecipesEntity
+import com.joseph.foody.data.database.entities.RecipesEntity
 import com.joseph.foody.models.FoodRecipe
 import com.joseph.foody.util.NetworkResult
-import okhttp3.Response
 
 @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
 fun errorImageViewVisivility(

@@ -1,4 +1,4 @@
-package com.joseph.foody.data.database
+package com.joseph.foody.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -11,5 +11,4 @@ class RecipesEntity(
 ) {
     @PrimaryKey(autoGenerate = false)
     var id: Int = 0
-
 }
