@@ -143,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:text="Vegan"
+                    android:text="@string/vegan"
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@+id/tv_clock"
                     app:layout_constraintTop_toBottomOf="@+id/img_clock"
