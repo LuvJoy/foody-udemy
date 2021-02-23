@@ -3,6 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="mainViewModel"
+            type="com.joseph.foody.viewmodels.MainViewModel" />
+
+        <variable
+            name="mAdapter"
+            type="com.joseph.foody.adapters.FavoriteRecipesAdapter" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -12,6 +23,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favoriteRecipesRecyclerView"
+            setData="@{mAdapter}"
+            viewVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -23,6 +36,7 @@
 
         <ImageView
             android:id="@+id/no_data_imageView"
+            viewVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:visibility="invisible"
@@ -36,6 +50,7 @@
 
         <TextView
             android:id="@+id/textView"
+            viewVisibility="@{mainViewModel.readFavoriteRecipes}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
