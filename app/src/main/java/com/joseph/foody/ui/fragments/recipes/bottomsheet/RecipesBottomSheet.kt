@@ -60,8 +60,9 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         initListener()
 
     }
+
     private fun updateChip(chipId: Int, chipGroup: ChipGroup) {
-        if(chipId != 0) {
+        if (chipId != 0) {
             try {
                 chipGroup.findViewById<Chip>(chipId).isChecked = true
             } catch (e: Exception) {

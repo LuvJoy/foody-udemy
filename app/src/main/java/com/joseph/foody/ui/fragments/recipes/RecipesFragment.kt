@@ -99,7 +99,7 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if(query != null) {
+        if (query != null) {
             searchApiData(query)
         }
         return true

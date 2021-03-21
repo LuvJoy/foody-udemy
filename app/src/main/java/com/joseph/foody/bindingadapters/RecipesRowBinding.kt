@@ -47,8 +47,8 @@ fun setNumberOfMinutes(textView: TextView, minutes: Int) {
 
 @BindingAdapter("applyVeganColor")
 fun applyVeganColor(view: View, vegan: Boolean) {
-    if(vegan) {
-        when(view) {
+    if (vegan) {
+        when (view) {
             is TextView -> {
                 view.setTextColor(ContextCompat.getColor(view.context, R.color.green))
             }
@@ -61,7 +61,7 @@ fun applyVeganColor(view: View, vegan: Boolean) {
 
 @BindingAdapter("parseHtml")
 fun parseHtml(textView: TextView, description: String) {
-    if(description != null) {
+    if (description != null) {
         val desc = Jsoup.parse(description).text()
         textView.text = desc
     }

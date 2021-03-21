@@ -14,8 +14,8 @@ fun setDataAndViewVisibility(
     favoritesEntity: List<FavoritesEntity>?,
     mAdapter: FavoriteRecipesAdapter?
 ) {
-    if(favoritesEntity.isNullOrEmpty()) {
-        when(view) {
+    if (favoritesEntity.isNullOrEmpty()) {
+        when (view) {
             is ImageView -> {
                 view.visibility = View.VISIBLE
             }
@@ -27,7 +27,7 @@ fun setDataAndViewVisibility(
             }
         }
     } else {
-        when(view) {
+        when (view) {
             is ImageView -> {
                 view.visibility = View.INVISIBLE
             }

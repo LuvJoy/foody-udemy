@@ -12,7 +12,8 @@ import com.joseph.foody.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavoriteRecipesFragment : BaseFragment<FragmentFavoriteRecipesBinding>(R.layout.fragment_favorite_recipes) {
+class FavoriteRecipesFragment :
+    BaseFragment<FragmentFavoriteRecipesBinding>(R.layout.fragment_favorite_recipes) {
 
     private val mAdapter: FavoriteRecipesAdapter by lazy { FavoriteRecipesAdapter(requireActivity()) }
     private val mainViewModel: MainViewModel by viewModels()

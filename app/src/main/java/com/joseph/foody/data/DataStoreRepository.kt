@@ -80,7 +80,7 @@ class DataStoreRepository @Inject constructor(
 
     val readBackOnline: Flow<Boolean> = dataStore.data
         .catch { exception ->
-            if(exception is IOException) {
+            if (exception is IOException) {
                 emit(emptyPreferences())
             } else {
                 throw exception
