@@ -34,4 +34,9 @@ class FavoriteRecipesFragment :
             layoutManager = LinearLayoutManager(requireContext())
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mAdapter.clearContextualActionMode()
+    }
 }
