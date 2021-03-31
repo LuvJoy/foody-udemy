@@ -6,17 +6,21 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.joseph.foody.R
 import com.joseph.foody.data.database.entities.FavoritesEntity
 import com.joseph.foody.databinding.FavoriteRecipeRowLayoutBinding
 import com.joseph.foody.ui.fragments.favorites.FavoriteRecipesFragmentDirections
 import com.joseph.foody.util.RecipesDiffUtil
+import com.joseph.foody.viewmodels.MainViewModel
 
 class FavoriteRecipesAdapter(
-    private val requireActivity: FragmentActivity
+    private val requireActivity: FragmentActivity,
+    private val mainViewModel: MainViewModel
 ) : RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>(), ActionMode.Callback {
 
     private lateinit var mActionMode: ActionMode
+    private lateinit var rootView: View
 
     private var favoriteRecipes = emptyList<FavoritesEntity>()
     private var selectedRecipes = arrayListOf<FavoritesEntity>()
@@ -51,6 +55,7 @@ class FavoriteRecipesAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         myViewHolders.add(holder)
+        rootView = holder.itemView.rootView
 
         val currentRecipe = favoriteRecipes[position]
         holder.bind(currentRecipe)
@@ -131,6 +136,15 @@ class FavoriteRecipesAdapter(
     }
 
     override fun onActionItemClicked(mode: android.view.ActionMode?, item: MenuItem?): Boolean {
+        if(item?.itemId == R.id.delete_favorite_recipe_menu) {
+            selectedRecipes.forEach {
+                mainViewModel.deleteFavoiteRecipe(it)
+            }
+            showSnackBar("${selectedRecipes.size} Recipe/s removed.")
+            multiSelection = false
+            selectedRecipes.clear()
+            mode?.finish()
+        }
         return true
     }
 
@@ -153,6 +167,15 @@ class FavoriteRecipesAdapter(
         val diffUtilResult = DiffUtil.calculateDiff(favoriteRecipesDiffUtil)
         favoriteRecipes = newFavoriteRecipes
         diffUtilResult.dispatchUpdatesTo(this)
+    }
+
+    private fun showSnackBar(message: String) {
+        Snackbar.make(
+            rootView,
+            message,
+            Snackbar.LENGTH_SHORT
+        ).setAction("Okey") {}
+            .show()
     }
 
 }
