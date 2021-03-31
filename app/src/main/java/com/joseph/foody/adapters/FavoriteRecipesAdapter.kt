@@ -1,7 +1,6 @@
 package com.joseph.foody.adapters
 
 import android.view.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.findNavController
@@ -17,7 +16,12 @@ class FavoriteRecipesAdapter(
     private val requireActivity: FragmentActivity
 ) : RecyclerView.Adapter<FavoriteRecipesAdapter.MyViewHolder>(), ActionMode.Callback {
 
+    private lateinit var mActionMode: ActionMode
+
     private var favoriteRecipes = emptyList<FavoritesEntity>()
+    private var selectedRecipes = arrayListOf<FavoritesEntity>()
+    private var myViewHolders = arrayListOf<MyViewHolder>()
+    private var multiSelection = false
 
     class MyViewHolder(
         val binding: FavoriteRecipeRowLayoutBinding,
@@ -46,20 +50,68 @@ class FavoriteRecipesAdapter(
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val selectedRecipe = favoriteRecipes[position]
-        holder.bind(selectedRecipe)
+        myViewHolders.add(holder)
+
+        val currentRecipe = favoriteRecipes[position]
+        holder.bind(currentRecipe)
 
         holder.binding.favoriteRecipesRowLayout.setOnClickListener {
-            val action =
-                FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailActivity(
-                    selectedRecipe.result
-                )
-            holder.binding.root.findNavController().navigate(action)
+            if (multiSelection) {
+                applySelection(holder, currentRecipe)
+            } else {
+                val action =
+                    FavoriteRecipesFragmentDirections.actionFavoriteRecipesFragmentToDetailActivity(
+                        currentRecipe.result
+                    )
+                holder.binding.root.findNavController().navigate(action)
+            }
         }
 
         holder.binding.favoriteRecipesRowLayout.setOnLongClickListener {
-            requireActivity.startActionMode(this)
-            true
+            if (!multiSelection) {
+                multiSelection = true
+                requireActivity.startActionMode(this)
+                applySelection(holder, currentRecipe)
+                true
+            } else {
+                multiSelection = false
+                false
+            }
+        }
+
+    }
+
+    private fun applySelection(holder: MyViewHolder, currentRecipes: FavoritesEntity) {
+        if (selectedRecipes.contains(currentRecipes)) {
+            selectedRecipes.remove(currentRecipes)
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
+            applyActionModeTitle()
+        } else {
+            selectedRecipes.add(currentRecipes)
+            changeRecipeStyle(holder, R.color.cardBackgroundLightColor, R.color.colorPrimary)
+            applyActionModeTitle()
+        }
+    }
+
+    private fun changeRecipeStyle(holder: MyViewHolder, backgroundColor: Int, strokeColor: Int) {
+        holder.binding.favoriteRecipesRowLayout.setBackgroundColor(
+            ContextCompat.getColor(requireActivity, backgroundColor)
+        )
+        holder.binding.favoriteRowCardView.strokeColor =
+            ContextCompat.getColor(requireActivity, strokeColor)
+    }
+
+    private fun applyActionModeTitle() {
+        when (selectedRecipes.size) {
+            0 -> {
+                mActionMode.finish()
+            }
+            1 -> {
+                mActionMode.title = "${selectedRecipes.size} item selected"
+            }
+            else -> {
+                mActionMode.title = "${selectedRecipes.size} items selected"
+            }
         }
     }
 
@@ -69,6 +121,7 @@ class FavoriteRecipesAdapter(
 
     override fun onCreateActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
         mode?.menuInflater?.inflate(R.menu.favorite_contextual_menu, menu)
+        mActionMode = mode!!
         applyStatusBarColor(R.color.contextualStatusBarColor)
         return true
     }
@@ -82,6 +135,11 @@ class FavoriteRecipesAdapter(
     }
 
     override fun onDestroyActionMode(mode: android.view.ActionMode?) {
+        myViewHolders.forEach { holder ->
+            changeRecipeStyle(holder, R.color.cardBackgroundColor, R.color.strokeColor)
+        }
+        multiSelection = false
+        selectedRecipes.clear()
         applyStatusBarColor(R.color.statusBarColor)
     }
 
