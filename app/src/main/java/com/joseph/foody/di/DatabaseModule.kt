@@ -28,5 +28,4 @@ object DatabaseModule {
     @Singleton
     @Provides
     fun provideDao(database: RecipesDatabase) = database.recipesDao()
-
 }

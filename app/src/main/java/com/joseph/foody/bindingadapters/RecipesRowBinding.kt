@@ -17,12 +17,12 @@ import org.jsoup.Jsoup
 @BindingAdapter("onRecipeClickListener")
 fun onRecipeClickListener(recipeRowLayout: ConstraintLayout, result: Result) {
     recipeRowLayout.setOnClickListener {
-        Log.d("TAG", "[TAG] - onRecipeClickListener() : ${result.toString()}")
+        Log.d("TAG", "[TAG] - onRecipeClickListener() : $result")
         try {
             val action = RecipesFragmentDirections.actionRecipesFragmentToDetailActivity(result)
             recipeRowLayout.findNavController().navigate(action)
         } catch (e: Exception) {
-            Log.d("TAG", "[TAG] - onRecipeClickListener() : ${e.toString()}")
+            Log.d("TAG", "[TAG] - onRecipeClickListener() : $e")
         }
     }
 }

@@ -1,10 +1,7 @@
 package com.joseph.foody.ui.fragments.overview
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import coil.load
 import com.joseph.foody.R
@@ -14,14 +11,12 @@ import com.joseph.foody.models.Result
 import com.joseph.foody.util.Constants.Companion.RECIPE_RESULT
 import org.jsoup.Jsoup
 
-
 class OverviewFragment : BaseFragment<FragmentOverviewBinding>(R.layout.fragment_overview) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-
     }
 
     private fun initView() {
@@ -112,7 +107,6 @@ class OverviewFragment : BaseFragment<FragmentOverviewBinding>(R.layout.fragment
                 )
                 cheapTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
             }
-
         }
     }
 }

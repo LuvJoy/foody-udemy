@@ -12,10 +12,10 @@ import com.joseph.foody.data.database.entities.FavoritesEntity
 import com.joseph.foody.data.database.entities.RecipesEntity
 import com.joseph.foody.models.FoodRecipe
 import com.joseph.foody.util.NetworkResult
+import java.lang.Exception
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.lang.Exception
 
 class MainViewModel @ViewModelInject constructor(
     private val repository: Repository,
@@ -136,5 +136,4 @@ class MainViewModel @ViewModelInject constructor(
             else -> false
         }
     }
-
 }

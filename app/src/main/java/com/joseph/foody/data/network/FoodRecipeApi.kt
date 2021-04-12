@@ -4,7 +4,6 @@ import com.joseph.foody.models.FoodRecipe
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Query
 import retrofit2.http.QueryMap
 
 interface FoodRecipeApi {
@@ -19,5 +18,4 @@ interface FoodRecipeApi {
     suspend fun searchRecipes(
         @QueryMap searchQuery: Map<String, String>
     ): Response<FoodRecipe>
-
 }

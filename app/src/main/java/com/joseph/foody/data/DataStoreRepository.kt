@@ -14,11 +14,11 @@ import com.joseph.foody.util.Constants.Companion.PREFERENCES_MEAL_TYPE_ID
 import com.joseph.foody.util.Constants.Companion.PREFERENCES_NAME
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import java.io.IOException
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import java.io.IOException
-import javax.inject.Inject
 
 @ActivityRetainedScoped
 class DataStoreRepository @Inject constructor(
@@ -47,7 +47,6 @@ class DataStoreRepository @Inject constructor(
             preferences[PreferenceKeys.selectedMealTypeId] = mealTypeId
             preferences[PreferenceKeys.selectedDietType] = dietType
             preferences[PreferenceKeys.selectedDietTypeId] = dietTypeId
-
         }
     }
 

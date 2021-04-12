@@ -1,7 +1,6 @@
 package com.joseph.foody.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -39,7 +38,6 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>
             ingredientConsistency.text = ingredientsList[position].consistency
             ingredientOriginal.text = ingredientsList[position].original
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -52,5 +50,4 @@ class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>
         ingredientsList = newIngredients
         diffUtilResult.dispatchUpdatesTo(this)
     }
-
 }

@@ -2,8 +2,8 @@ package com.joseph.foody.data
 
 import com.joseph.foody.data.network.FoodRecipeApi
 import com.joseph.foody.models.FoodRecipe
-import retrofit2.Response
 import javax.inject.Inject
+import retrofit2.Response
 
 class RemoteDataSource @Inject constructor(
     private val foodRecipeApi: FoodRecipeApi
@@ -16,5 +16,4 @@ class RemoteDataSource @Inject constructor(
     suspend fun searchRecipes(searchQuery: Map<String, String>): Response<FoodRecipe> {
         return foodRecipeApi.searchRecipes(searchQuery)
     }
-
 }

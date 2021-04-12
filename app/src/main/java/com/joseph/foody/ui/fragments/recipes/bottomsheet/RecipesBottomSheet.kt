@@ -2,7 +2,6 @@ package com.joseph.foody.ui.fragments.recipes.bottomsheet
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +11,12 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.joseph.foody.R
-import com.joseph.foody.base.BaseFragment
 import com.joseph.foody.databinding.RecipesBottomSheetBinding
 import com.joseph.foody.util.Constants.Companion.DEFAULT_DIET_TYPE
 import com.joseph.foody.util.Constants.Companion.DEFAULT_MEAL_TYPE
 import com.joseph.foody.viewmodels.RecipesViewModel
 import java.lang.Exception
 import java.util.*
-
 
 class RecipesBottomSheet : BottomSheetDialogFragment() {
 
@@ -58,7 +54,6 @@ class RecipesBottomSheet : BottomSheetDialogFragment() {
         })
 
         initListener()
-
     }
 
     private fun updateChip(chipId: Int, chipGroup: ChipGroup) {

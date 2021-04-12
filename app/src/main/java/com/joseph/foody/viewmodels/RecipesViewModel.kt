@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.joseph.foody.data.DataStoreRepository
-import com.joseph.foody.util.Constants
 import com.joseph.foody.util.Constants.Companion.API_KEY
 import com.joseph.foody.util.Constants.Companion.DEFAULT_DIET_TYPE
 import com.joseph.foody.util.Constants.Companion.DEFAULT_MEAL_TYPE

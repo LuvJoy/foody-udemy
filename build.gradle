@@ -1,10 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = "1.4.21"
+
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
+
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -13,6 +16,8 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+
 }
 
 allprojects {
@@ -23,6 +28,48 @@ allprojects {
     }
 }
 
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+subprojects {
+
+    repositories {
+        jcenter()
+    }
+
+    configurations {
+        ktlint
+    }
+
+    afterEvaluate { project ->
+        check.dependsOn ktlint
+    }
+
+    dependencies {
+        ktlint "com.pinterest:ktlint:0.35.0"
+        // additional 3rd party ruleset(s) can be specified here
+        // just add them to the classpath (e.g. ktlint 'groupId:artifactId:version') and
+        // ktlint will pick them up
+    }
+
+    task ktlint(type: JavaExec, group: "verification") {
+        description = "Check Kotlin code style."
+        classpath = configurations.ktlint
+        main = "com.pinterest.ktlint.Main"
+        args "src/**/*.kt"
+        // to generate report in checkstyle format prepend following args:
+        // "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/ktlint.xml"
+        // see https://github.com/pinterest/ktlint#usage for more
+    }
+
+    /** 스타일 수정 후 자동으로 수정해 줌 */
+    task ktlintFormat(type: JavaExec, group: "formatting") {
+        description = "Fix Kotlin code style deviations."
+        classpath = configurations.ktlint
+        main = "com.pinterest.ktlint.Main"
+        args "-F", "src/**/*.kt"
+    }
+}
+

@@ -10,7 +10,6 @@ import com.joseph.foody.databinding.FragmentIngredientBinding
 import com.joseph.foody.models.Result
 import com.joseph.foody.util.Constants.Companion.RECIPE_RESULT
 
-
 class IngredientFragment : BaseFragment<FragmentIngredientBinding>(R.layout.fragment_ingredient) {
 
     private val mAdapter: IngredientsAdapter by lazy { IngredientsAdapter() }
@@ -20,7 +19,6 @@ class IngredientFragment : BaseFragment<FragmentIngredientBinding>(R.layout.frag
 
         setupRecyclerView()
         initView()
-
     }
 
     private fun initView() {

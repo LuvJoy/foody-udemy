@@ -3,8 +3,8 @@ package com.joseph.foody.data
 import com.joseph.foody.data.database.RecipesDao
 import com.joseph.foody.data.database.entities.FavoritesEntity
 import com.joseph.foody.data.database.entities.RecipesEntity
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource @Inject constructor(
     private val recipesDao: RecipesDao

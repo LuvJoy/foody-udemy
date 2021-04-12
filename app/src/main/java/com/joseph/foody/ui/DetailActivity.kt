@@ -1,11 +1,11 @@
 package com.joseph.foody.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -37,7 +37,6 @@ class DetailActivity : AppCompatActivity() {
 
         initActionBar()
         initTabLayout()
-
     }
 
     private fun initActionBar() {
@@ -75,7 +74,6 @@ class DetailActivity : AppCompatActivity() {
             viewPager.adapter = adapter
             tabLayout.setupWithViewPager(viewPager)
         }
-
     }
 
     private fun checkSaveRecipes(item: MenuItem) {
@@ -131,7 +129,6 @@ class DetailActivity : AppCompatActivity() {
                     saveToFavorites(item)
                 }
             }
-
         }
 
         return super.onOptionsItemSelected(item)

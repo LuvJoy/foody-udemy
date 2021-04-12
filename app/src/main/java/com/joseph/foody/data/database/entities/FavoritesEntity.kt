@@ -11,4 +11,3 @@ class FavoritesEntity(
     var id: Int,
     var result: Result
 )
-

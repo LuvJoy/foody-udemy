@@ -7,22 +7,19 @@ import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.joseph.foody.viewmodels.MainViewModel
 import com.joseph.foody.R
 import com.joseph.foody.adapters.RecipesAdapter
 import com.joseph.foody.base.BaseFragment
 import com.joseph.foody.databinding.FragmentRecipesBinding
-import com.joseph.foody.util.Constants.Companion.API_KEY
 import com.joseph.foody.util.NetworkListener
 import com.joseph.foody.util.NetworkResult
 import com.joseph.foody.util.observeOnce
+import com.joseph.foody.viewmodels.MainViewModel
 import com.joseph.foody.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,7 +43,6 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
 
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         recipesViewModel = ViewModelProvider(requireActivity()).get(RecipesViewModel::class.java)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,7 +74,6 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
                     readDatabase()
                 }
         }
-
     }
 
     private fun setupRecyclerView() {
@@ -192,7 +187,4 @@ class RecipesFragment : BaseFragment<FragmentRecipesBinding>(R.layout.fragment_r
     private fun hideShimmerEffect() {
         binding.recyclerview.hideShimmer()
     }
-
-
 }
-

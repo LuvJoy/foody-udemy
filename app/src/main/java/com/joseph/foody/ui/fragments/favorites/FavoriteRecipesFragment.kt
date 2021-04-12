@@ -30,7 +30,6 @@ class FavoriteRecipesFragment :
 
         setHasOptionsMenu(true)
         initRecyclerView()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -38,7 +37,7 @@ class FavoriteRecipesFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.delete_all_favorite_recipes_menu) {
+        if (item.itemId == R.id.delete_all_favorite_recipes_menu) {
             mainViewModel.deleteAllFavoriteRecipes()
             showSnackBar()
         }
